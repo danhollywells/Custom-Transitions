@@ -6,33 +6,41 @@
 //  Copyright (c) 2013 Devon. All rights reserved.
 //
 
+#import "CTDDragToDismissTransition.h"
 #import "CTDSecondViewController.h"
 
-@interface CTDSecondViewController ()
-
+@interface CTDSecondViewController () <CTDDragToDismissTransitionDelegate, UIViewControllerTransitioningDelegate>
+@property (strong) CTDDragToDismissTransition *dragToDismiss;
 @end
 
 @implementation CTDSecondViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+    self = [super initWithCoder:aDecoder];
     return self;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.dragToDismiss = [[CTDDragToDismissTransition alloc] initWithSourceView:self.view];
+    self.dragToDismiss.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning
+- (void)dragDownToDismissTransitionDidBeginDragging:(CTDDragToDismissTransition *)transition
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.transitioningDelegate = self;
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return self.dragToDismiss;
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator
+{
+    return self.dragToDismiss;
 }
 
 @end

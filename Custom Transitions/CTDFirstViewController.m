@@ -20,7 +20,6 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    self.title = @"First";
     return self;
 }
 

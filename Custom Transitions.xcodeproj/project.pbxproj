@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000F4BAA186D373B009BD0E9 /* CTDDragToDismissTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 000F4BA9186D373B009BD0E9 /* CTDDragToDismissTransition.m */; };
 		004B8792186D3165004DB238 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004B8791186D3165004DB238 /* Foundation.framework */; };
 		004B8794186D3165004DB238 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004B8793186D3165004DB238 /* CoreGraphics.framework */; };
 		004B8796186D3165004DB238 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004B8795186D3165004DB238 /* UIKit.framework */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		000F4BA8186D373B009BD0E9 /* CTDDragToDismissTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDDragToDismissTransition.h; sourceTree = "<group>"; };
+		000F4BA9186D373B009BD0E9 /* CTDDragToDismissTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDDragToDismissTransition.m; sourceTree = "<group>"; };
 		004B878E186D3165004DB238 /* Custom Transitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Custom Transitions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B8791186D3165004DB238 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		004B8793186D3165004DB238 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +125,8 @@
 				004B87A1186D3165004DB238 /* CTDAppDelegate.m */,
 				004B87CC186D340B004DB238 /* CTDCrossfadeTransition.h */,
 				004B87CD186D340B004DB238 /* CTDCrossfadeTransition.m */,
+				000F4BA8186D373B009BD0E9 /* CTDDragToDismissTransition.h */,
+				000F4BA9186D373B009BD0E9 /* CTDDragToDismissTransition.m */,
 				004B87C6186D31EC004DB238 /* CTDFirstViewController.h */,
 				004B87C7186D31EC004DB238 /* CTDFirstViewController.m */,
 				004B87C9186D31F4004DB238 /* CTDSecondViewController.h */,
@@ -262,6 +267,7 @@
 			files = (
 				004B87A2186D3165004DB238 /* CTDAppDelegate.m in Sources */,
 				004B87CB186D31F4004DB238 /* CTDSecondViewController.m in Sources */,
+				000F4BAA186D373B009BD0E9 /* CTDDragToDismissTransition.m in Sources */,
 				004B87C8186D31EC004DB238 /* CTDFirstViewController.m in Sources */,
 				004B87CE186D340B004DB238 /* CTDCrossfadeTransition.m in Sources */,
 				004B879E186D3165004DB238 /* main.m in Sources */,
