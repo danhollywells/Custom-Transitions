@@ -120,6 +120,8 @@
 			children = (
 				004B87A0186D3165004DB238 /* CTDAppDelegate.h */,
 				004B87A1186D3165004DB238 /* CTDAppDelegate.m */,
+				004B87CC186D340B004DB238 /* CTDCrossfadeTransition.h */,
+				004B87CD186D340B004DB238 /* CTDCrossfadeTransition.m */,
 				004B87C6186D31EC004DB238 /* CTDFirstViewController.h */,
 				004B87C7186D31EC004DB238 /* CTDFirstViewController.m */,
 				004B87C9186D31F4004DB238 /* CTDSecondViewController.h */,
@@ -127,8 +129,6 @@
 				004B87A9186D3165004DB238 /* Images.xcassets */,
 				004B87A3186D3165004DB238 /* Main.storyboard */,
 				004B8798186D3165004DB238 /* Supporting Files */,
-				004B87CC186D340B004DB238 /* CTDCrossfadeTransition.h */,
-				004B87CD186D340B004DB238 /* CTDCrossfadeTransition.m */,
 			);
 			path = "Custom Transitions";
 			sourceTree = "<group>";
@@ -473,6 +473,7 @@
 				004B87C2186D3165004DB238 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		004B87C3186D3165004DB238 /* Build configuration list for PBXNativeTarget "Custom TransitionsTests" */ = {
 			isa = XCConfigurationList;
@@ -481,6 +482,7 @@
 				004B87C5186D3165004DB238 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

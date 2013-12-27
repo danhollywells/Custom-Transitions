@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Devon. All rights reserved.
 //
 
+#import "CTDCrossfadeTransition.h"
 #import "CTDFirstViewController.h"
 #import "CTDSecondViewController.h"
 
@@ -34,8 +35,7 @@
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
-//    return [[CTDCrossfadeTransition alloc] init];
-    return nil;
+    return [[CTDCrossfadeTransition alloc] init];
 }
 
 @end
