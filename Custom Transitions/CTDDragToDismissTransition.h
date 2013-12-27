@@ -12,7 +12,7 @@
 
 @interface CTDDragToDismissTransition : NSObject <UIViewControllerAnimatedTransitioning, UIViewControllerInteractiveTransitioning>
 @property (nonatomic, weak) id<CTDDragToDismissTransitionDelegate> delegate;
-- (id)initWithSourceView:(UIView *)view;
+- (instancetype)initWithSourceView:(UIView *)view;
 @end
 
 @protocol CTDDragToDismissTransitionDelegate <NSObject>
