@@ -14,13 +14,15 @@
 		004B879E186D3165004DB238 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B879D186D3165004DB238 /* main.m */; };
 		004B87A2186D3165004DB238 /* CTDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B87A1186D3165004DB238 /* CTDAppDelegate.m */; };
 		004B87A5186D3165004DB238 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 004B87A3186D3165004DB238 /* Main.storyboard */; };
-		004B87A8186D3165004DB238 /* CTDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B87A7186D3165004DB238 /* CTDViewController.m */; };
 		004B87AA186D3165004DB238 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B87A9186D3165004DB238 /* Images.xcassets */; };
 		004B87B1186D3165004DB238 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004B87B0186D3165004DB238 /* XCTest.framework */; };
 		004B87B2186D3165004DB238 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004B8791186D3165004DB238 /* Foundation.framework */; };
 		004B87B3186D3165004DB238 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004B8795186D3165004DB238 /* UIKit.framework */; };
 		004B87BB186D3165004DB238 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 004B87B9186D3165004DB238 /* InfoPlist.strings */; };
 		004B87BD186D3165004DB238 /* Custom_TransitionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B87BC186D3165004DB238 /* Custom_TransitionsTests.m */; };
+		004B87C8186D31EC004DB238 /* CTDFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B87C7186D31EC004DB238 /* CTDFirstViewController.m */; };
+		004B87CB186D31F4004DB238 /* CTDSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B87CA186D31F4004DB238 /* CTDSecondViewController.m */; };
+		004B87CE186D340B004DB238 /* CTDCrossfadeTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B87CD186D340B004DB238 /* CTDCrossfadeTransition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +47,18 @@
 		004B87A0186D3165004DB238 /* CTDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDAppDelegate.h; sourceTree = "<group>"; };
 		004B87A1186D3165004DB238 /* CTDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDAppDelegate.m; sourceTree = "<group>"; };
 		004B87A4186D3165004DB238 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		004B87A6186D3165004DB238 /* CTDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTDViewController.h; sourceTree = "<group>"; };
-		004B87A7186D3165004DB238 /* CTDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTDViewController.m; sourceTree = "<group>"; };
 		004B87A9186D3165004DB238 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		004B87AF186D3165004DB238 /* Custom TransitionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Custom TransitionsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B87B0186D3165004DB238 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		004B87B8186D3165004DB238 /* Custom TransitionsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Custom TransitionsTests-Info.plist"; sourceTree = "<group>"; };
 		004B87BA186D3165004DB238 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		004B87BC186D3165004DB238 /* Custom_TransitionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Custom_TransitionsTests.m; sourceTree = "<group>"; };
+		004B87C6186D31EC004DB238 /* CTDFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDFirstViewController.h; sourceTree = "<group>"; };
+		004B87C7186D31EC004DB238 /* CTDFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDFirstViewController.m; sourceTree = "<group>"; };
+		004B87C9186D31F4004DB238 /* CTDSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDSecondViewController.h; sourceTree = "<group>"; };
+		004B87CA186D31F4004DB238 /* CTDSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSecondViewController.m; sourceTree = "<group>"; };
+		004B87CC186D340B004DB238 /* CTDCrossfadeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCrossfadeTransition.h; sourceTree = "<group>"; };
+		004B87CD186D340B004DB238 /* CTDCrossfadeTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDCrossfadeTransition.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,11 +120,15 @@
 			children = (
 				004B87A0186D3165004DB238 /* CTDAppDelegate.h */,
 				004B87A1186D3165004DB238 /* CTDAppDelegate.m */,
-				004B87A3186D3165004DB238 /* Main.storyboard */,
-				004B87A6186D3165004DB238 /* CTDViewController.h */,
-				004B87A7186D3165004DB238 /* CTDViewController.m */,
+				004B87C6186D31EC004DB238 /* CTDFirstViewController.h */,
+				004B87C7186D31EC004DB238 /* CTDFirstViewController.m */,
+				004B87C9186D31F4004DB238 /* CTDSecondViewController.h */,
+				004B87CA186D31F4004DB238 /* CTDSecondViewController.m */,
 				004B87A9186D3165004DB238 /* Images.xcassets */,
+				004B87A3186D3165004DB238 /* Main.storyboard */,
 				004B8798186D3165004DB238 /* Supporting Files */,
+				004B87CC186D340B004DB238 /* CTDCrossfadeTransition.h */,
+				004B87CD186D340B004DB238 /* CTDCrossfadeTransition.m */,
 			);
 			path = "Custom Transitions";
 			sourceTree = "<group>";
@@ -251,8 +261,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				004B87A2186D3165004DB238 /* CTDAppDelegate.m in Sources */,
+				004B87CB186D31F4004DB238 /* CTDSecondViewController.m in Sources */,
+				004B87C8186D31EC004DB238 /* CTDFirstViewController.m in Sources */,
+				004B87CE186D340B004DB238 /* CTDCrossfadeTransition.m in Sources */,
 				004B879E186D3165004DB238 /* main.m in Sources */,
-				004B87A8186D3165004DB238 /* CTDViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

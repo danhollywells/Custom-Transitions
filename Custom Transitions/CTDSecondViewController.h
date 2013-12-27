@@ -1,5 +1,5 @@
 //
-//  CTDAppDelegate.h
+//  CTDSecondViewController.h
 //  Custom Transitions
 //
 //  Created by Devon on 12/26/2013.
@@ -8,8 +8,6 @@
 
 @import UIKit;
 
-@interface CTDAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface CTDSecondViewController : UIViewController
 
 @end
