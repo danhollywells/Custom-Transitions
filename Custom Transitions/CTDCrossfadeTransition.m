@@ -21,21 +21,25 @@
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 
     fromVC.view.frame = [transitionContext initialFrameForViewController:fromVC];
+
+    UIView *snapshotView = [toVC.view snapshotViewAfterScreenUpdates:YES];
     toVC.view.frame = [transitionContext finalFrameForViewController:toVC];
 
     [transitionContext.containerView addSubview:fromVC.view];
-    [transitionContext.containerView addSubview:toVC.view];
+    [transitionContext.containerView addSubview:snapshotView];
 
     NSTimeInterval duration = [self transitionDuration:transitionContext];
 
-    toVC.view.alpha = 0.0;
+    snapshotView.alpha = 0;
 
     // animate the views’ alpha to perform crossfade
     [UIView animateWithDuration:duration animations:^{
-        toVC.view.alpha = 1.0;
+        snapshotView.alpha = 1.0;
         fromVC.view.alpha = 0.0;
     } completion:^(BOOL finished) {
         fromVC.view.alpha = 1.0;
+        [transitionContext.containerView addSubview:toVC.view];
+        [snapshotView removeFromSuperview];
         [transitionContext completeTransition:YES];
     }];
 }
