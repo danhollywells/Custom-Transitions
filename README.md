@@ -12,3 +12,4 @@ Fork of https://github.com/devonc/Custom-Transitions
 
 Modified the Drag to Dismiss Transition, added support for non-interactive animations and presentation
 Modified demo to support Navigation Controller and Modal View Controller presentation
+Added support to allow for interactive dismissal on top of a UIScrollView  
