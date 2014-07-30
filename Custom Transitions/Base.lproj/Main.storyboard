@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="HQn-OT-H11">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <scenes>
-        <!--First View Controller - First-->
+        <!--First-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController storyboardIdentifier="First" title="First" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="CTDFirstViewController" sceneMemberID="viewController">
@@ -17,28 +18,39 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXg-AE-17a">
-                                <rect key="frame" x="134" y="269" width="53" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Present">
+                                <rect key="frame" x="105" y="269" width="111" height="30"/>
+                                <state key="normal" title="Present Modally">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="presentSecondViewController:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9AK-d8-dIV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKa-23-Bbh">
+                                <rect key="frame" x="141" y="319" width="39" height="30"/>
+                                <state key="normal" title="Push ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushSecondViewController:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fP6-Tb-1ah"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.88315544610661501" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="MXg-AE-17a" secondAttribute="centerX" constant="-0.5" id="Blg-D7-sEx"/>
+                            <constraint firstItem="OKa-23-Bbh" firstAttribute="top" secondItem="MXg-AE-17a" secondAttribute="bottom" constant="20" id="KXb-AY-Ra3"/>
+                            <constraint firstAttribute="centerX" secondItem="OKa-23-Bbh" secondAttribute="centerX" id="Wpo-Oj-vFj"/>
                             <constraint firstAttribute="centerY" secondItem="MXg-AE-17a" secondAttribute="centerY" id="cyL-9G-N8S"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="vpY-mO-cGE"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130" y="109"/>
+            <point key="canvasLocation" x="662" y="109"/>
         </scene>
-        <!--Second View Controller - Second-->
+        <!--Second-->
         <scene sceneID="fWX-Bf-8iP">
             <objects>
                 <viewController storyboardIdentifier="Second" title="Second" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fYa-Dk-BFM" customClass="CTDSecondViewController" sceneMemberID="viewController">
@@ -52,27 +64,80 @@
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag down to dismiss" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDE-Y1-zXO">
                                 <rect key="frame" x="77" y="273" width="167" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGD-Ky-xed">
+                                <rect key="frame" x="143" y="364" width="35" height="30"/>
+                                <state key="normal" title="Push">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushViewController:" destination="fYa-Dk-BFM" eventType="touchUpInside" id="Bcq-X8-TQO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blA-CA-sTj">
+                                <rect key="frame" x="106" y="223" width="108" height="30"/>
+                                <state key="normal" title="Manual Dismiss">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissViewController:" destination="fYa-Dk-BFM" eventType="touchUpInside" id="oCr-Xd-RZ4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL6-jt-awM">
+                                <rect key="frame" x="105" y="314" width="111" height="30"/>
+                                <state key="normal" title="Present Modally">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="modalPresentViewController:" destination="fYa-Dk-BFM" eventType="touchUpInside" id="IxL-aZ-RHQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.83456257488913854" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="LGD-Ky-xed" firstAttribute="top" secondItem="SL6-jt-awM" secondAttribute="bottom" constant="20" id="1JW-Cj-2ry"/>
+                            <constraint firstItem="gDE-Y1-zXO" firstAttribute="top" secondItem="blA-CA-sTj" secondAttribute="bottom" constant="20" id="CCI-Ov-uSK"/>
+                            <constraint firstAttribute="centerX" secondItem="SL6-jt-awM" secondAttribute="centerX" id="Gtb-1i-5Xb"/>
                             <constraint firstAttribute="centerX" secondItem="gDE-Y1-zXO" secondAttribute="centerX" constant="-0.5" id="ICl-8a-5ZM"/>
+                            <constraint firstAttribute="centerX" secondItem="LGD-Ky-xed" secondAttribute="centerX" id="QH9-7H-ZSE"/>
+                            <constraint firstItem="SL6-jt-awM" firstAttribute="top" secondItem="gDE-Y1-zXO" secondAttribute="bottom" constant="20" id="vrd-ZV-rfA"/>
                             <constraint firstAttribute="centerY" secondItem="gDE-Y1-zXO" secondAttribute="centerY" constant="0.5" id="yYT-V0-o0P"/>
+                            <constraint firstAttribute="centerX" secondItem="blA-CA-sTj" secondAttribute="centerX" id="zqU-oO-eQd"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2VV-4q-vBW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="499" y="109"/>
+            <point key="canvasLocation" x="1031" y="109"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0yn-7s-QCB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HQn-OT-H11" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tHB-Ll-O1x">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="MEe-nE-8sY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3nO-Mz-iBl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130" y="109"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
 </document>

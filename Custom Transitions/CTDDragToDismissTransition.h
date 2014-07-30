@@ -11,8 +11,14 @@
 @protocol CTDDragToDismissTransitionDelegate;
 
 @interface CTDDragToDismissTransition : NSObject <UIViewControllerAnimatedTransitioning, UIViewControllerInteractiveTransitioning>
+
 @property (nonatomic, weak) id<CTDDragToDismissTransitionDelegate> delegate;
-- (instancetype)initWithSourceView:(UIView *)view;
+@property (nonatomic, readonly) UIPanGestureRecognizer *panGesture;
+@property (nonatomic, assign) BOOL isPresenting;
+
+- (instancetype)initWithSourceView:(UIView *)view NS_DESIGNATED_INITIALIZER;
+- (BOOL)isInteractive;
+
 @end
 
 @protocol CTDDragToDismissTransitionDelegate <NSObject>
