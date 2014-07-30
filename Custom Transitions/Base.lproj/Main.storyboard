@@ -20,6 +20,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXg-AE-17a">
                                 <rect key="frame" x="105" y="269" width="111" height="30"/>
                                 <state key="normal" title="Present Modally">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -29,6 +30,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKa-23-Bbh">
                                 <rect key="frame" x="141" y="319" width="39" height="30"/>
                                 <state key="normal" title="Push ">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -62,15 +64,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yw6-Ic-gP4">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <connections>
+                                    <outlet property="delegate" destination="fYa-Dk-BFM" id="Vf2-8a-Zwv"/>
+                                </connections>
+                            </scrollView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag down to dismiss" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDE-Y1-zXO">
                                 <rect key="frame" x="77" y="273" width="167" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGD-Ky-xed">
                                 <rect key="frame" x="143" y="364" width="35" height="30"/>
                                 <state key="normal" title="Push">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -78,8 +87,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blA-CA-sTj">
-                                <rect key="frame" x="106" y="223" width="108" height="30"/>
-                                <state key="normal" title="Manual Dismiss">
+                                <rect key="frame" x="89" y="223" width="142" height="30"/>
+                                <state key="normal" title="Programatic Dismiss">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -89,6 +99,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL6-jt-awM">
                                 <rect key="frame" x="105" y="314" width="111" height="30"/>
                                 <state key="normal" title="Present Modally">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -99,15 +110,22 @@
                         <color key="backgroundColor" red="0.0" green="0.83456257488913854" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="LGD-Ky-xed" firstAttribute="top" secondItem="SL6-jt-awM" secondAttribute="bottom" constant="20" id="1JW-Cj-2ry"/>
+                            <constraint firstItem="yw6-Ic-gP4" firstAttribute="leading" secondItem="uTF-jj-1Jg" secondAttribute="leading" id="4JJ-jy-2tx"/>
                             <constraint firstItem="gDE-Y1-zXO" firstAttribute="top" secondItem="blA-CA-sTj" secondAttribute="bottom" constant="20" id="CCI-Ov-uSK"/>
+                            <constraint firstItem="yw6-Ic-gP4" firstAttribute="top" secondItem="hnb-tI-b3J" secondAttribute="top" id="Dcm-Ai-P1H"/>
                             <constraint firstAttribute="centerX" secondItem="SL6-jt-awM" secondAttribute="centerX" id="Gtb-1i-5Xb"/>
-                            <constraint firstAttribute="centerX" secondItem="gDE-Y1-zXO" secondAttribute="centerX" constant="-0.5" id="ICl-8a-5ZM"/>
+                            <constraint firstAttribute="centerX" secondItem="gDE-Y1-zXO" secondAttribute="centerX" id="ICl-8a-5ZM"/>
+                            <constraint firstItem="dcW-c8-aY4" firstAttribute="top" secondItem="yw6-Ic-gP4" secondAttribute="bottom" id="OF3-10-VV1"/>
                             <constraint firstAttribute="centerX" secondItem="LGD-Ky-xed" secondAttribute="centerX" id="QH9-7H-ZSE"/>
+                            <constraint firstAttribute="trailing" secondItem="yw6-Ic-gP4" secondAttribute="trailing" id="qsa-o5-oi3"/>
                             <constraint firstItem="SL6-jt-awM" firstAttribute="top" secondItem="gDE-Y1-zXO" secondAttribute="bottom" constant="20" id="vrd-ZV-rfA"/>
-                            <constraint firstAttribute="centerY" secondItem="gDE-Y1-zXO" secondAttribute="centerY" constant="0.5" id="yYT-V0-o0P"/>
+                            <constraint firstAttribute="centerY" secondItem="gDE-Y1-zXO" secondAttribute="centerY" id="yYT-V0-o0P"/>
                             <constraint firstAttribute="centerX" secondItem="blA-CA-sTj" secondAttribute="centerX" id="zqU-oO-eQd"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="yw6-Ic-gP4" id="DHZ-N0-Z9B"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2VV-4q-vBW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

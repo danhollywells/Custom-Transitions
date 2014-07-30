@@ -11,6 +11,7 @@
 
 @interface CTDSecondViewController () <CTDDragToDismissTransitionDelegate, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 @property (strong) CTDDragToDismissTransition *dragToDismiss;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @end
 
 @implementation CTDSecondViewController
@@ -23,19 +24,16 @@
 
 - (void)viewDidLoad
 {
+    [self viewDecorations];
+    
     self.dragToDismiss = [[CTDDragToDismissTransition alloc] initWithSourceView:self.view];
     self.dragToDismiss.delegate = self;
-    
-    // Color code from https://gist.github.com/kylefox/1689973
-    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-    
-    self.view.backgroundColor = color;
-    
-    self.title = [NSString stringWithFormat:@"Controller %d", [self.navigationController.viewControllers count]];
-    
+
+    [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.dragToDismiss.panGesture];
+    CGRect scrollViewFixGestureActivationFrame = self.view.frame;
+    scrollViewFixGestureActivationFrame.size.height = 70;
+    [self.dragToDismiss setGestureActivationFrame:scrollViewFixGestureActivationFrame];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -121,5 +119,30 @@
         [self dismissViewControllerAnimated:YES completion:NULL];
     }
 }
+
+
+
+- (void)viewDecorations
+{
+    
+    self.title = [NSString stringWithFormat:@"Controller %d", [self.navigationController.viewControllers count]];
+    
+    
+    // Color code from https://gist.github.com/kylefox/1689973
+    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+    self.view.backgroundColor = color;
+    
+    
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 1000)];
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 100, self.scrollView.contentSize.height);
+    gradientLayer.colors = @[(id)[UIColor colorWithWhite:1.0f alpha:1.0f].CGColor, (id)[UIColor colorWithWhite:0.0f alpha:1.0f].CGColor];
+    gradientLayer.locations = @[@(0.0f), @(1.0f)];
+    [self.scrollView.layer addSublayer:gradientLayer];
+}
+
 
 @end

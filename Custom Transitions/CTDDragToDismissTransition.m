@@ -8,7 +8,7 @@
 
 #import "CTDDragToDismissTransition.h"
 
-@interface CTDDragToDismissTransition ()
+@interface CTDDragToDismissTransition () <UIGestureRecognizerDelegate>
 @property (strong) id<UIViewControllerContextTransitioning> context;
 @property (strong) UIPanGestureRecognizer *panGesture;
 @property UIOffset touchOffsetFromCenter;
@@ -26,6 +26,7 @@
     self = [super init];
     if (self) {
         self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panned:)];
+        self.panGesture.delegate = self;
         [view addGestureRecognizer:self.panGesture];
     }
     return self;
@@ -35,10 +36,7 @@
 {
     [self.panGesture.view removeGestureRecognizer:self.panGesture];
 }
-- (BOOL)isInteractive
-{
-    return [self.panGesture numberOfTouches] > 0;
-}
+
 #pragma mark - Animated Transitioning
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -79,30 +77,24 @@
 
 }
 
-#pragma mark - Helpers
+#pragma mark - Gesture Recognizer
 
-- (void)setupTransitionWithContext:(id<UIViewControllerContextTransitioning>)transitionContext
+- (CGRect)gestureActivationFrame
 {
-    self.context = transitionContext;
-    self.transitionContainer = transitionContext.containerView;
-    
-    UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    
-    toVC.view.frame = [transitionContext finalFrameForViewController:toVC];
-    fromVC.view.frame = [transitionContext initialFrameForViewController:fromVC];
-    
-    [self.transitionContainer addSubview:toVC.view];
-    [self.transitionContainer addSubview:fromVC.view];
-    
-    self.viewBeingDismissed = fromVC.view;
-    self.viewBeingPresented = toVC.view;
+    if (CGRectIsNull(_gestureActivationFrame) || CGRectIsEmpty(_gestureActivationFrame)) {
+        return self.panGesture.view.frame;
+    }
+    return _gestureActivationFrame;
 }
 
-- (CGFloat)percentageBasedOnLocationOfFromView
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    UIView *container = self.context.containerView;
-    return CGRectGetMinY(self.viewBeingDismissed.frame) / CGRectGetHeight(container.frame);
+    
+    CGPoint location = [gestureRecognizer locationInView:gestureRecognizer.view];
+    if (gestureRecognizer == self.panGesture && CGRectContainsPoint(self.gestureActivationFrame, location)) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)panned:(UIPanGestureRecognizer *)gesture
@@ -111,21 +103,21 @@
         case UIGestureRecognizerStateBegan:
             [self.delegate dragDownToDismissTransitionDidBeginDragging:self];
             break;
-
+            
         case UIGestureRecognizerStateChanged: {
             CGPoint touchLocation = [self.panGesture locationInView:self.transitionContainer];
-
+            
             CGPoint center = self.viewBeingDismissed.center;
             center.y = touchLocation.y - self.touchOffsetFromCenter.vertical;
             if (center.y >= self.transitionContainer.center.y) {
                 self.viewBeingDismissed.center = center;
             }
             
-
+            
             [self.context updateInteractiveTransition:self.percentageBasedOnLocationOfFromView];
             break;
         }
-
+            
         case UIGestureRecognizerStateEnded:
             if (self.percentageBasedOnLocationOfFromView >= 0.33) {
                 [self finishInteraction];
@@ -133,37 +125,14 @@
                 [self cancelInteraction];
             }
             break;
-
+            
         default:
             [self cancelInteraction];
             break;
     }
 }
 
-- (void)finishInteraction
-{
-    // cause the view to keep disappearing off the bottom
-    [self animateViewDown];
-    [self.context finishInteractiveTransition];
-}
-
-- (void)cancelInteraction
-{
-    // cause the view to snap back in to place
-    [self animateViewUp:self.viewBeingDismissed];
-    [self.context cancelInteractiveTransition];
-}
-
-- (void)completeTransition
-{
-    BOOL finished = !self.context.transitionWasCancelled;
-    [self.context completeTransition:finished];
-
-    self.context = nil;
-    self.touchOffsetFromCenter = UIOffsetZero;
-    self.transitionContainer = nil;
-    self.viewBeingDismissed = nil;
-}
+#pragma mark - Animations
 
 - (void)animateViewUp:(UIView *)viewToBeAnimated
 {
@@ -195,7 +164,7 @@
     };
     
     [animator addBehavior:snap];
-
+    
 }
 
 - (void)animateViewDown
@@ -219,6 +188,62 @@
     
     [animator addBehavior:gravity];
     
+}
+
+#pragma mark - Helpers
+
+- (void)setupTransitionWithContext:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    self.context = transitionContext;
+    self.transitionContainer = transitionContext.containerView;
+    
+    UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
+    toVC.view.frame = [transitionContext finalFrameForViewController:toVC];
+    fromVC.view.frame = [transitionContext initialFrameForViewController:fromVC];
+    
+    [self.transitionContainer addSubview:toVC.view];
+    [self.transitionContainer addSubview:fromVC.view];
+    
+    self.viewBeingDismissed = fromVC.view;
+    self.viewBeingPresented = toVC.view;
+}
+
+- (CGFloat)percentageBasedOnLocationOfFromView
+{
+    UIView *container = self.context.containerView;
+    return CGRectGetMinY(self.viewBeingDismissed.frame) / CGRectGetHeight(container.frame);
+}
+
+- (BOOL)isInteractive
+{
+    return [self.panGesture numberOfTouches] > 0;
+}
+
+- (void)finishInteraction
+{
+    // cause the view to keep disappearing off the bottom
+    [self animateViewDown];
+    [self.context finishInteractiveTransition];
+}
+
+- (void)cancelInteraction
+{
+    // cause the view to snap back in to place
+    [self animateViewUp:self.viewBeingDismissed];
+    [self.context cancelInteractiveTransition];
+}
+
+- (void)completeTransition
+{
+    BOOL finished = !self.context.transitionWasCancelled;
+    [self.context completeTransition:finished];
+
+    self.context = nil;
+    self.touchOffsetFromCenter = UIOffsetZero;
+    self.transitionContainer = nil;
+    self.viewBeingDismissed = nil;
 }
 
 @end
