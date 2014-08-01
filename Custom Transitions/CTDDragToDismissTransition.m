@@ -67,7 +67,7 @@
 
 - (void)startInteractiveTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    NSAssert([self isInteractive], @"Don't start a static transition as interactive");
+    //NSAssert([self isInteractive], @"Don't start a static transition as interactive");
     
     [self setupTransitionWithContext:transitionContext];
     
@@ -87,15 +87,15 @@
     return _gestureActivationFrame;
 }
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-    
-    CGPoint location = [gestureRecognizer locationInView:gestureRecognizer.view];
-    if (gestureRecognizer == self.panGesture && CGRectContainsPoint(self.gestureActivationFrame, location)) {
-        return YES;
-    }
-    return NO;
-}
+//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+//{
+//    
+//    CGPoint location = [gestureRecognizer locationInView:gestureRecognizer.view];
+//    if (gestureRecognizer == self.panGesture && CGRectContainsPoint(self.gestureActivationFrame, location)) {
+//        return YES;
+//    }
+//    return NO;
+//}
 
 - (void)panned:(UIPanGestureRecognizer *)gesture
 {
@@ -218,7 +218,7 @@
 
 - (BOOL)isInteractive
 {
-    return [self.panGesture numberOfTouches] > 0;
+    return [self.panGesture numberOfTouches] > 0 && self.panGesture.state != UIGestureRecognizerStateCancelled;
 }
 
 - (void)finishInteraction
@@ -231,7 +231,9 @@
 - (void)cancelInteraction
 {
     // cause the view to snap back in to place
-    [self animateViewUp:self.viewBeingDismissed];
+    if (self.viewBeingDismissed) {
+        [self animateViewUp:self.viewBeingDismissed];
+    }
     [self.context cancelInteractiveTransition];
 }
 

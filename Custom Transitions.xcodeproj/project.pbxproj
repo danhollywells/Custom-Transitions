@@ -24,6 +24,7 @@
 		004B87C8186D31EC004DB238 /* CTDFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B87C7186D31EC004DB238 /* CTDFirstViewController.m */; };
 		004B87CB186D31F4004DB238 /* CTDSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B87CA186D31F4004DB238 /* CTDSecondViewController.m */; };
 		004B87CE186D340B004DB238 /* CTDCrossfadeTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 004B87CD186D340B004DB238 /* CTDCrossfadeTransition.m */; };
+		370565D0198BD1E200E0704C /* CTDNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 370565CF198BD1E200E0704C /* CTDNavigationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		004B87CA186D31F4004DB238 /* CTDSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDSecondViewController.m; sourceTree = "<group>"; };
 		004B87CC186D340B004DB238 /* CTDCrossfadeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDCrossfadeTransition.h; sourceTree = "<group>"; };
 		004B87CD186D340B004DB238 /* CTDCrossfadeTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDCrossfadeTransition.m; sourceTree = "<group>"; };
+		370565CE198BD1E200E0704C /* CTDNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDNavigationViewController.h; sourceTree = "<group>"; };
+		370565CF198BD1E200E0704C /* CTDNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDNavigationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 				004B87CD186D340B004DB238 /* CTDCrossfadeTransition.m */,
 				000F4BA8186D373B009BD0E9 /* CTDDragToDismissTransition.h */,
 				000F4BA9186D373B009BD0E9 /* CTDDragToDismissTransition.m */,
+				370565CE198BD1E200E0704C /* CTDNavigationViewController.h */,
+				370565CF198BD1E200E0704C /* CTDNavigationViewController.m */,
 				004B87C6186D31EC004DB238 /* CTDFirstViewController.h */,
 				004B87C7186D31EC004DB238 /* CTDFirstViewController.m */,
 				004B87C9186D31F4004DB238 /* CTDSecondViewController.h */,
@@ -271,6 +276,7 @@
 				004B87C8186D31EC004DB238 /* CTDFirstViewController.m in Sources */,
 				004B87CE186D340B004DB238 /* CTDCrossfadeTransition.m in Sources */,
 				004B879E186D3165004DB238 /* main.m in Sources */,
+				370565D0198BD1E200E0704C /* CTDNavigationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,8 +9,7 @@
 #import "CTDDragToDismissTransition.h"
 #import "CTDSecondViewController.h"
 
-@interface CTDSecondViewController () <CTDDragToDismissTransitionDelegate, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
-@property (strong) CTDDragToDismissTransition *dragToDismiss;
+@interface CTDSecondViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @end
 
@@ -24,64 +23,21 @@
 
 - (void)viewDidLoad
 {
-    [self viewDecorations];
+    // Color code from https://gist.github.com/kylefox/1689973
+    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+    self.view.backgroundColor = color;
     
-    self.dragToDismiss = [[CTDDragToDismissTransition alloc] initWithSourceView:self.view];
-    self.dragToDismiss.delegate = self;
-
-    [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.dragToDismiss.panGesture];
-    CGRect scrollViewFixGestureActivationFrame = self.view.frame;
-    scrollViewFixGestureActivationFrame.size.height = 70;
-    [self.dragToDismiss setGestureActivationFrame:scrollViewFixGestureActivationFrame];
-
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    if (self.navigationController) {
-        self.navigationController.delegate = self;
-        //Disable UIPanGestureRecognizer for the first ViewController in the Nav stack because you can't dismiss the first view controller
-        [self.dragToDismiss.panGesture setEnabled:(self != [self.navigationController.viewControllers firstObject])];
-    }
-}
-
-- (void)dragDownToDismissTransitionDidBeginDragging:(CTDDragToDismissTransition *)transition
-{
-    [self dismissViewController:self];
-}
-
-- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source;
-{
-    self.dragToDismiss.isPresenting = YES;
-    return self.dragToDismiss;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-{
-    return self.dragToDismiss;
-}
-
-- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator
-{
-    if ([self.dragToDismiss isInteractive]) {
-        return self.dragToDismiss;
-    }
-    return nil;
-}
-
-- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController
-{
-    if ([self.dragToDismiss isInteractive]) {
-        return self.dragToDismiss;
-    }
-    return nil;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
-{
-    self.dragToDismiss.isPresenting = (operation == UINavigationControllerOperationPush);
-    return self.dragToDismiss;
+    
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 1000)];
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 100, self.scrollView.contentSize.height);
+    gradientLayer.colors = @[(id)[UIColor colorWithWhite:1.0f alpha:1.0f].CGColor, (id)[UIColor colorWithWhite:0.0f alpha:1.0f].CGColor];
+    gradientLayer.locations = @[@(0.0f), @(1.0f)];
+    [self.scrollView.layer addSublayer:gradientLayer];
+    
 }
 
 - (IBAction)modalPresentViewController:(id)sender
@@ -102,6 +58,7 @@
 {
     CTDSecondViewController *second = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Second"];
     if (self.navigationController) {
+        second.transitioningDelegate = self;
         [self.navigationController pushViewController:second animated:YES];
     }
     else if (self.presentingViewController) {
@@ -118,30 +75,6 @@
         self.transitioningDelegate = self;
         [self dismissViewControllerAnimated:YES completion:NULL];
     }
-}
-
-
-
-- (void)viewDecorations
-{
-    
-    self.title = [NSString stringWithFormat:@"Controller %d", [self.navigationController.viewControllers count]];
-    
-    
-    // Color code from https://gist.github.com/kylefox/1689973
-    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-    self.view.backgroundColor = color;
-    
-    
-    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 1000)];
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 100, self.scrollView.contentSize.height);
-    gradientLayer.colors = @[(id)[UIColor colorWithWhite:1.0f alpha:1.0f].CGColor, (id)[UIColor colorWithWhite:0.0f alpha:1.0f].CGColor];
-    gradientLayer.locations = @[@(0.0f), @(1.0f)];
-    [self.scrollView.layer addSublayer:gradientLayer];
 }
 
 
