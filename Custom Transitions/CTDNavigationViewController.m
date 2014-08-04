@@ -33,17 +33,7 @@
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     // You can't dismiss the first view controller
-    if ([self.viewControllers firstObject] == viewController) {
-        [self.dragToDismiss.panGesture setEnabled:NO];
-    }
-    
-    // Only Enable for CTDSecondViewController
-    if ([viewController isKindOfClass:[CTDSecondViewController class]]) {
-        [self.dragToDismiss.panGesture setEnabled:YES];
-    }
-    else {
-        [self.dragToDismiss.panGesture setEnabled:NO];
-    }
+    [self.dragToDismiss.panGesture setEnabled:([self.viewControllers firstObject] != viewController)];
     
 }
 
@@ -52,7 +42,11 @@
 
 - (void)dragDownToDismissTransitionDidBeginDragging:(CTDDragToDismissTransition *)transition
 {
-    [self popViewControllerAnimated:YES];
+    if ([self.viewControllers count] > 1) {
+        [self popViewControllerAnimated:YES];
+    } else {
+        NSLog(@"Can't Pop root view controller");
+    }
 }
 
 #pragma mark - UINavigationControllerDelegate

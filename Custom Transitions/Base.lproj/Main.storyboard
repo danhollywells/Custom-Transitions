@@ -134,7 +134,7 @@
         <!--Navigation View Controller-->
         <scene sceneID="0yn-7s-QCB">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HQn-OT-H11" customClass="CTDNavigationViewController" sceneMemberID="viewController">
+                <navigationController hidesBottomBarWhenPushed="YES" id="HQn-OT-H11" customClass="CTDNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tHB-Ll-O1x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

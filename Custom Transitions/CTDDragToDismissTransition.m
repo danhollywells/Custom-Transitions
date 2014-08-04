@@ -12,6 +12,7 @@
 @property (strong) id<UIViewControllerContextTransitioning> context;
 @property (strong) UIPanGestureRecognizer *panGesture;
 @property UIOffset touchOffsetFromCenter;
+@property (strong) NSSet *recognizedCompetingGestures;
 
 @property (strong) UIView *transitionContainer;
 @property (strong) UIView *viewBeingDismissed;
@@ -35,6 +36,7 @@
 - (void)dealloc
 {
     [self.panGesture.view removeGestureRecognizer:self.panGesture];
+    self.recognizedCompetingGestures = nil;
 }
 
 #pragma mark - Animated Transitioning
@@ -67,8 +69,6 @@
 
 - (void)startInteractiveTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    //NSAssert([self isInteractive], @"Don't start a static transition as interactive");
-    
     [self setupTransitionWithContext:transitionContext];
     
     CGPoint fingerPoint = [self.panGesture locationInView:self.viewBeingDismissed];
@@ -87,21 +87,32 @@
     return _gestureActivationFrame;
 }
 
-//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-//{
-//    
-//    CGPoint location = [gestureRecognizer locationInView:gestureRecognizer.view];
-//    if (gestureRecognizer == self.panGesture && CGRectContainsPoint(self.gestureActivationFrame, location)) {
-//        return YES;
-//    }
-//    return NO;
-//}
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    CGPoint location = [gestureRecognizer locationInView:gestureRecognizer.view];
+    if (gestureRecognizer == self.panGesture && CGRectContainsPoint(self.gestureActivationFrame, location)) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if (gestureRecognizer == self.panGesture) { //&& [otherGestureRecognizer.view.class isSubclassOfClass:[UIScrollView class]]) {
+        self.recognizedCompetingGestures = [NSSet setWithObjects:otherGestureRecognizer, [self.recognizedCompetingGestures allObjects], nil];
+        return YES;
+    }
+    return NO;
+}
 
 - (void)panned:(UIPanGestureRecognizer *)gesture
 {
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
             [self.delegate dragDownToDismissTransitionDidBeginDragging:self];
+            [self.recognizedCompetingGestures setValue:@NO forKey:@"enabled"];
+            [self.recognizedCompetingGestures setValue:@YES forKey:@"enabled"];
+            self.recognizedCompetingGestures = nil;
             break;
             
         case UIGestureRecognizerStateChanged: {
@@ -112,7 +123,6 @@
             if (center.y >= self.transitionContainer.center.y) {
                 self.viewBeingDismissed.center = center;
             }
-            
             
             [self.context updateInteractiveTransition:self.percentageBasedOnLocationOfFromView];
             break;

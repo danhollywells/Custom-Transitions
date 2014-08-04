@@ -9,7 +9,8 @@
 #import "CTDDragToDismissTransition.h"
 #import "CTDSecondViewController.h"
 
-@interface CTDSecondViewController () <UIViewControllerTransitioningDelegate>
+@interface CTDSecondViewController () <UIViewControllerTransitioningDelegate>//, CTDDragToDismissTransitionDelegate>
+//@property (strong) CTDDragToDismissTransition *dragToDismiss;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @end
 
@@ -23,6 +24,8 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     // Color code from https://gist.github.com/kylefox/1689973
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
@@ -38,6 +41,32 @@
     gradientLayer.locations = @[@(0.0f), @(1.0f)];
     [self.scrollView.layer addSublayer:gradientLayer];
     
+//    self.dragToDismiss = [[CTDDragToDismissTransition alloc] initWithSourceView:self.view];
+//    self.dragToDismiss.delegate = self;
+//}
+//
+//- (void)dragDownToDismissTransitionDidBeginDragging:(CTDDragToDismissTransition *)transition
+//{
+//    [self dismissViewController:self];
+//}
+//
+//- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source;
+//{
+//    self.dragToDismiss.isPresenting = YES;
+//    return self.dragToDismiss;
+//}
+//
+//- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+//{
+//    return self.dragToDismiss;
+//}
+//
+//- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator
+//{
+//    if ([self.dragToDismiss isInteractive]) {
+//        return self.dragToDismiss;
+//    }
+//    return nil;
 }
 
 - (IBAction)modalPresentViewController:(id)sender
@@ -77,5 +106,14 @@
     }
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return UIStatusBarAnimationSlide;
+}
 
 @end
