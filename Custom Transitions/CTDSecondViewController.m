@@ -9,8 +9,8 @@
 #import "CTDDragToDismissTransition.h"
 #import "CTDSecondViewController.h"
 
-@interface CTDSecondViewController () <UIViewControllerTransitioningDelegate>//, CTDDragToDismissTransitionDelegate>
-//@property (strong) CTDDragToDismissTransition *dragToDismiss;
+@interface CTDSecondViewController () <UIViewControllerTransitioningDelegate, CTDDragToDismissTransitionDelegate>
+@property (strong) CTDDragToDismissTransition *dragToDismiss;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @end
 
@@ -41,32 +41,40 @@
     gradientLayer.locations = @[@(0.0f), @(1.0f)];
     [self.scrollView.layer addSublayer:gradientLayer];
     
-//    self.dragToDismiss = [[CTDDragToDismissTransition alloc] initWithSourceView:self.view];
-//    self.dragToDismiss.delegate = self;
-//}
-//
-//- (void)dragDownToDismissTransitionDidBeginDragging:(CTDDragToDismissTransition *)transition
-//{
-//    [self dismissViewController:self];
-//}
-//
-//- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source;
-//{
-//    self.dragToDismiss.isPresenting = YES;
-//    return self.dragToDismiss;
-//}
-//
-//- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-//{
-//    return self.dragToDismiss;
-//}
-//
-//- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator
-//{
-//    if ([self.dragToDismiss isInteractive]) {
-//        return self.dragToDismiss;
-//    }
-//    return nil;
+    if (self.presentingViewController) {
+        self.dragToDismiss = [[CTDDragToDismissTransition alloc] initWithSourceView:self.view];
+        self.dragToDismiss.delegate = self;
+        
+        CGRect gestureActivationZoneFrame = self.view.frame;
+        gestureActivationZoneFrame.size.height = 70;
+        [self.dragToDismiss setGestureActivationFrame:gestureActivationZoneFrame];
+
+    }
+    
+}
+
+- (void)dragDownToDismissTransitionDidBeginDragging:(CTDDragToDismissTransition *)transition
+{
+    [self dismissViewController:self];
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source;
+{
+    self.dragToDismiss.isPresenting = YES;
+    return self.dragToDismiss;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return self.dragToDismiss;
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator
+{
+    if ([self.dragToDismiss isInteractive]) {
+        return self.dragToDismiss;
+    }
+    return nil;
 }
 
 - (IBAction)modalPresentViewController:(id)sender
