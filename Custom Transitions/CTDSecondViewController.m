@@ -9,7 +9,7 @@
 #import "CTDDragToDismissTransition.h"
 #import "CTDSecondViewController.h"
 
-@interface CTDSecondViewController () <UIViewControllerTransitioningDelegate, CTDDragToDismissTransitionDelegate>
+@interface CTDSecondViewController () <CTDDragToDismissTransitionDelegate>
 @property (strong) CTDDragToDismissTransition *dragToDismiss;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @end
@@ -41,16 +41,21 @@
     gradientLayer.locations = @[@(0.0f), @(1.0f)];
     [self.scrollView.layer addSublayer:gradientLayer];
     
-    if (self.presentingViewController) {
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (self.presentingViewController && !self.dragToDismiss) {
         self.dragToDismiss = [[CTDDragToDismissTransition alloc] initWithSourceView:self.view];
         self.dragToDismiss.delegate = self;
         
         CGRect gestureActivationZoneFrame = self.view.frame;
         gestureActivationZoneFrame.size.height = 70;
         [self.dragToDismiss setGestureActivationFrame:gestureActivationZoneFrame];
-
     }
-    
+
 }
 
 - (void)dragDownToDismissTransitionDidBeginDragging:(CTDDragToDismissTransition *)transition

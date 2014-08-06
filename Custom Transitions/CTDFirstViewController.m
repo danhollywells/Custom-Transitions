@@ -30,7 +30,9 @@
     CTDSecondViewController *second = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Second"];
     second.modalPresentationStyle = UIModalPresentationFullScreen;
     second.transitioningDelegate = self;
-    [self presentViewController:second animated:YES completion:NULL];
+    [self presentViewController:second animated:YES completion:^{
+        second.transitioningDelegate = second;
+    }];
 }
 
 - (IBAction)pushSecondViewController:(id)sender

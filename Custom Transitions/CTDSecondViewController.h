@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface CTDSecondViewController : UIViewController
+@interface CTDSecondViewController : UIViewController <UIViewControllerTransitioningDelegate>
 
 @end
