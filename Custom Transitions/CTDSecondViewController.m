@@ -73,6 +73,9 @@
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
+    if (dismissed == self) {
+        self.dragToDismiss.isPresenting = NO;
+    }
     return self.dragToDismiss;
 }
 
@@ -86,16 +89,10 @@
 
 - (IBAction)modalPresentViewController:(id)sender
 {
-    if (!self.presentingViewController) {
-        CTDSecondViewController *second = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Second"];
-        second.modalPresentationStyle = UIModalPresentationFullScreen;
-        second.transitioningDelegate = self;
-        [self presentViewController:second animated:YES completion:NULL];
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You can't modally present something when you are already modally presented" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }
+    CTDSecondViewController *second = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Second"];
+    second.modalPresentationStyle = UIModalPresentationFullScreen;
+    second.transitioningDelegate = self;
+    [self presentViewController:second animated:YES completion:NULL];
 }
 
 - (IBAction)pushViewController:(id)sender
@@ -106,7 +103,7 @@
         [self.navigationController pushViewController:second animated:YES];
     }
     else if (self.presentingViewController) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You can't modally present something when you are already modally presented" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You can't push without a navigation controller" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }
