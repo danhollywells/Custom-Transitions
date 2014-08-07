@@ -12,7 +12,6 @@
 @property (strong) id<UIViewControllerContextTransitioning> context;
 @property (strong) UIPanGestureRecognizer *panGesture;
 @property UIOffset touchOffsetFromCenter;
-@property (strong) NSSet *recognizedCompetingGestures;
 
 @property (strong) UIView *transitionContainer;
 @property (strong) UIView *viewBeingDismissed;
@@ -36,7 +35,6 @@
 - (void)dealloc
 {
     [self.panGesture.view removeGestureRecognizer:self.panGesture];
-    self.recognizedCompetingGestures = nil;
 }
 
 #pragma mark - Animated Transitioning
@@ -98,8 +96,15 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    if (gestureRecognizer == self.panGesture) { //&& [otherGestureRecognizer.view.class isSubclassOfClass:[UIScrollView class]]) {
-        self.recognizedCompetingGestures = [NSSet setWithObjects:otherGestureRecognizer, [self.recognizedCompetingGestures allObjects], nil];
+    if (gestureRecognizer == self.panGesture) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if (gestureRecognizer == self.panGesture) {
         return YES;
     }
     return NO;
@@ -110,9 +115,6 @@
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
             [self.delegate dragDownToDismissTransitionDidBeginDragging:self];
-            [self.recognizedCompetingGestures setValue:@NO forKey:@"enabled"];
-            [self.recognizedCompetingGestures setValue:@YES forKey:@"enabled"];
-            self.recognizedCompetingGestures = nil;
             break;
             
         case UIGestureRecognizerStateChanged: {

@@ -54,6 +54,8 @@
         CGRect gestureActivationZoneFrame = self.view.frame;
         gestureActivationZoneFrame.size.height = 70;
         [self.dragToDismiss setGestureActivationFrame:gestureActivationZoneFrame];
+        
+        [self setNeedsStatusBarAppearanceUpdate];
     }
 
 }
